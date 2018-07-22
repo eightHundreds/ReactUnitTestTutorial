@@ -103,17 +103,3 @@ shallow将组件渲染,将结果包装,并提供一系列方法.
 - 由于使用的是`shallow`,`SubComponent`的内容并不能测到,所以这句能通过测试`expect(wrapper.find('subComponent').length).toBe(0)`
 - 你可以使用wrapper.debug()输出类似html的字符串来看看渲染结果
 
-
-## 测试覆盖
-
-执行测试并生成测试覆盖
-
-在 create-react-app 中
-
-```
-np run test -- --coverage
-```
-
-一般情况下直接`jest --coverage`
-
-测试结果会在命令行中输出一张表格,这些数据的意思请参考[这里](http://www.ruanyifeng.com/blog/2015/06/istanbul.html)
