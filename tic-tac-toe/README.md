@@ -68,8 +68,8 @@ describe("test Square", () => {
     const mockOnClick = jest.fn();
     const wrapper = shallow(<Square value={123} onClick={mockOnClick} />);
     expect(wrapper.text()).toBe("123");
-    wrapper.simulate("click");
-    expect(mockOnClick).toBeCalled();
+    wrapper.simulate("click");// 模拟点击事件
+    expect(mockOnClick).toBeCalled(); // 断言传入的mockOnClick被调用了
   });
 });
 ```

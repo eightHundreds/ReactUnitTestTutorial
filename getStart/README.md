@@ -103,3 +103,6 @@ shallow将组件渲染,将结果包装,并提供一系列方法.
 - 由于使用的是`shallow`,`SubComponent`的内容并不能测到,所以这句能通过测试`expect(wrapper.find('subComponent').length).toBe(0)`
 - 你可以使用wrapper.debug()输出类似html的字符串来看看渲染结果
 
+# 总结
+
+本文很短,没有大量的官方文档翻译:) ,我认为像这类工具库没必要把文档都读完(你用jquery前会把文档读完?).而且Enzyme的api也比较简单,大部分都是dom查询操作,所以这部分还是留给你自己查了(我在根目录README提供了中文api地址)
