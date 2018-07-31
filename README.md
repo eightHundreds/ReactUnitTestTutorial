@@ -19,3 +19,5 @@
 - [Enzyme官方文档](http://airbnb.io/enzyme/docs/api)
 - [Enzyme-API中文 只有shadow的api 最后更新时间2017.3](https://github.com/Zyingying/Enzyme-API)
 - [react-test-demo](https://github.com/superman66/react-test-demo)
+- [如何在 React+Redux 的项目中更优雅的实现前端自动化测试](https://testerhome.com/topics/8032)
+- [Jest](https://jestjs.io)
