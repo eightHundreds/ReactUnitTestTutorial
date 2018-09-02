@@ -1,6 +1,6 @@
 # 前言
 
-立志成为React单元测试老司机,本文假设你有jest,react,webpack,babel等基础知识
+立志成为~~React单元测试~~前端测试老司机,本文假设你有jest,react,webpack,babel等基础知识
 
 # 技术栈
 
@@ -11,7 +11,8 @@
 # 阅读顺序
 
 1. getStart enzyme测试入门,渲染一个简单的组件
-2. tic-tac-toe 测试react官方文档的教程tic-tac-toe
+2. tic-tac-toe 测试react官方文档的教程中的demo`tic-tac-toe`
+3. 持续集成
 
 
 # 参考资料
