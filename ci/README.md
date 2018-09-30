@@ -16,6 +16,26 @@
 - 跑测试代码
 - 部署(code review之后),也就是CD(continuous deployment)
 
+# 准备工作
+
+## coveralls
+
+coveralls是一个在线测试覆盖率检测报告网站，在这个例子中，我将借助travis构建项目并触发测试，并将测试报告推送到coveralls。
+首先你需要登入https://coveralls.io，使用github账号登入，在左侧菜单选择`ADD REPO`，将指定的仓库开关打开。
+
+coverall对测试报告有一定的要求，所以你需要安装对应语言的工具包，将测试结果通过工具转换成符合规定的格式
+```
+yarn add coveralls --dev
+```
 
 
+
+# 配置
+
+添加`.travis.yml`到仓库的根目录（目前没发现把`.travis.yml`放到子目录的办法)
+
+配置如下
+```
+
+```
 

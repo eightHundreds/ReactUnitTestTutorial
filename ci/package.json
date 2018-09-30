@@ -11,6 +11,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "test:cover":"react-scripts test --env=jsdom --coverage | coveralls",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "coveralls": "^3.0.2"
+  },
+  "jest": {
+    "coverageReporters": [
+      "text-lcov"
+    ]
   }
 }
