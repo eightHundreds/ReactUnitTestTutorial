@@ -46,7 +46,7 @@ Enzyme 内置了
 - mount
   - Full Rendering，非常适用于存在于 DOM API 存在交互组件，或者需要测试组件完整的声明周期
 - render
-  - Static Rendering，用于 将 React 组件渲染成静态的 HTML 并分析生成的 HTML 结构。
+  - Static Rendering，用于 将 React 组件渲染成静态的 HTML 并分析生成的 HTML 结构。并使用[cheerio](https://cheerio.js.org/)解析html
 
 第一个测试就简单地测试组件是否按预期渲染
 被测试的组件

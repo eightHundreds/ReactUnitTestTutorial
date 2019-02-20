@@ -5,11 +5,28 @@ class SubComponent extends Component {
   }
 }
 class App extends Component {
+  static defaultProps = {
+    title: 'App'
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       value: 1
     };
+  }
+  componentDidMount() {
+    if (!document.head.querySelector('title')) {
+      const title = document.createElement('title')
+      title.innerText = this.props.title;
+      document.head.appendChild(title);
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.title !== this.props.title) {
+      const title = document.head.querySelector('title')
+      title.innerText = nextProps.title
+    }
   }
   render() {
     return (
