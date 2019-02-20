@@ -63,8 +63,8 @@ function Square(props) {
 }
 
 // 测试代码
-describe("test Square", () => {
-  it("test render", () => {
+describe("Square", () => {
+  test("test render", () => {
     const mockOnClick = jest.fn();
     const wrapper = shallow(<Square value={123} onClick={mockOnClick} />);
     expect(wrapper.text()).toBe("123");
@@ -122,7 +122,7 @@ class Board extends React.Component {
 测试代码:
 ```JavaScript
 describe("test Board", () => {
-  it("test render", () => {
+  test("test render", () => {
     //给与一个默认实现,这个实现是一个返回值总是'mock function'的函数
     const mockOnClick = jest.fn(() => "mock function");
     const squares = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -130,7 +130,7 @@ describe("test Board", () => {
     expect(
       wrapper.findWhere(
         wrapper =>
-          wrapper.is(Square) && wrapper.prop("onClick")() === "mock function"
+          wrapper.is(Square)
       ).length
     ).toBe(9);
   });
@@ -151,7 +151,7 @@ describe("case 2", () => {
       expect(button.text()).toBe(exceptContent);
     }
   };
-  it("X win", () => {
+  test("X win", () => {
     const wrapper = mount(<Game />);
     const rows = wrapper.find(".board-row");
     click(0, 0, rows, "X");

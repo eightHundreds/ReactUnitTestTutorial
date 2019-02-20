@@ -1,11 +1,35 @@
 import React, { Component } from "react";
 import { mount } from "enzyme";
 import Game from "./Game";
-it("123", () => {});
-it("case 1", () => {
-  const wrapper = mount(<Game />);
 
-  const firstBoardRow = wrapper.find(".board-row").first();
+let GameWrapper;
+beforeEach(() => {
+  GameWrapper = mount(<Game />);
+});
+
+const click = (x, y, wrapper, exceptContent) => {
+  if (!wrapper) {
+    wrapper = GameWrapper;
+  }
+  const rows = wrapper.find(".board-row");
+  const button = rows
+    .at(y)
+    .find(".square")
+    .at(x);
+  button.simulate("click");
+  if (exceptContent) {
+    expect(button.text()).toBe(exceptContent);
+  }
+};
+
+const replayGame = (steps, wrapper) => {
+  steps.forEach(item => {
+    click(item[0], item[1], wrapper);
+  });
+};
+
+test("should render X when first btn click render O when second btn click", () => {
+  const firstBoardRow = GameWrapper.find(".board-row").first();
   const firstButton = firstBoardRow.find(".square").first();
   const secondButton = firstBoardRow.find(".square").at(1);
   firstButton.simulate("click");
@@ -14,29 +38,50 @@ it("case 1", () => {
   expect(secondButton.text()).toBe("O");
 });
 
-describe("case 2", () => {
-  const click = (x, y, rows, exceptContent) => {
-    const button = rows
-      .at(y)
-      .find(".square")
-      .at(x);
-    button.simulate("click");
-    if (exceptContent) {
-      expect(button.text()).toBe(exceptContent);
-    }
-  };
-  it("X win", () => {
-    const wrapper = mount(<Game />);
-    const rows = wrapper.find(".board-row");
-    click(0, 0, rows, "X");
-    click(1, 1, rows, "O");
-    click(0, 1, rows, "X");
-    click(2, 2, rows, "O");
-    click(0, 2, rows, "X");
-    const result = wrapper
-      .find(".game-info > div")
-      .first()
-      .text();
-    expect(result).toBe("Winner: X");
+test("should show Next player:O  after first click", () => {
+  const firstBoardRow = GameWrapper.find(".board-row").first();
+  const firstButton = firstBoardRow.find(".square").first();
+
+  firstButton.simulate("click");
+  const nextPlayer = GameWrapper.find(".game-info > div");
+  expect(nextPlayer.text()).toBe("Next player: O");
+});
+
+test.each`
+  clickSteps                                          | winner
+  ${[[0, 0], [1, 1], [0, 1], [2, 2], [0, 2]]}         | ${"X"}
+  ${[[0, 0], [1, 1], [0, 1], [1, 2], [2, 2], [1, 0]]} | ${"O"}
+`("test winner ,$winner win", ({ clickSteps, winner }) => {
+  replayGame(clickSteps);
+  const result = GameWrapper.find(".game-info > div")
+    .first()
+    .text();
+  expect(result).toBe(`Winner: ${winner}`);
+});
+
+describe("history", () => {
+  const steps = [[0, 0], [1, 1], [0, 1], [2, 2], [0, 2]];
+  beforeEach(() => {
+    replayGame(steps);
+  });
+  test("should correct render history", () => {
+    const no = 3;
+    const btn = GameWrapper.find(".game-info ol li")
+      .at(no)
+      .find("button");
+    expect(btn.text()).toBe(`Go to move #${no}`);
+  });
+  test(`should correct render when click history`, () => {
+    const gotoStepNo = 3;
+    const btn = GameWrapper.find(".game-info ol li")
+      .at(gotoStepNo)
+      .find("button");
+
+    const anotherGame = mount(<Game />);
+    replayGame(steps.slice(0, gotoStepNo), anotherGame);
+    const expectBoard = anotherGame.find(".game-board").html();
+
+    btn.simulate("click");
+    expect(GameWrapper.find(".game-board").html()).toBe(expectBoard);
   });
 });

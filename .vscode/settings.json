@@ -1,0 +1,4 @@
+{
+    "jest.pathToJest": "getStart/node_modules/react-scripts/node_modules/.bin/jest",
+    "jest.debugMode": true
+}
