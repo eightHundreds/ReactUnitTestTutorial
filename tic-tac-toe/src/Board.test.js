@@ -1,16 +1,9 @@
-import Board, { Square } from "./Board";
+import React from "react";
+import Board from "./Board";
+import Square from './Square'
 import { shallow, mount, render } from "enzyme";
 
-import React from "react";
-describe("Square", () => {
-  test("test render", () => {
-    const mockOnClick = jest.fn();
-    const wrapper = shallow(<Square value={123} onClick={mockOnClick} />);
-    expect(wrapper.text()).toBe("123");
-    wrapper.simulate("click");
-    expect(mockOnClick).toBeCalled();
-  });
-});
+
 
 describe("Board", () => {
   test("test render", () => {

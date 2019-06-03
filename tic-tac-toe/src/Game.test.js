@@ -7,7 +7,7 @@ beforeEach(() => {
   GameWrapper = mount(<Game />);
 });
 
-const click = (x, y, wrapper, exceptContent) => {
+const click = (x, y, wrapper) => {
   if (!wrapper) {
     wrapper = GameWrapper;
   }
@@ -17,12 +17,9 @@ const click = (x, y, wrapper, exceptContent) => {
     .find(".square")
     .at(x);
   button.simulate("click");
-  if (exceptContent) {
-    expect(button.text()).toBe(exceptContent);
-  }
 };
 
-const replayGame = (steps, wrapper) => {
+const applySteps = (steps, wrapper) => {
   steps.forEach(item => {
     click(item[0], item[1], wrapper);
   });
@@ -39,10 +36,8 @@ test("should render X when first btn click render O when second btn click", () =
 });
 
 test("should show Next player:O  after first click", () => {
-  const firstBoardRow = GameWrapper.find(".board-row").first();
-  const firstButton = firstBoardRow.find(".square").first();
+  click(0,0);
 
-  firstButton.simulate("click");
   const nextPlayer = GameWrapper.find(".game-info > div");
   expect(nextPlayer.text()).toBe("Next player: O");
 });
@@ -52,7 +47,7 @@ test.each`
   ${[[0, 0], [1, 1], [0, 1], [2, 2], [0, 2]]}         | ${"X"}
   ${[[0, 0], [1, 1], [0, 1], [1, 2], [2, 2], [1, 0]]} | ${"O"}
 `("test winner ,$winner win", ({ clickSteps, winner }) => {
-  replayGame(clickSteps);
+  applySteps(clickSteps);
   const result = GameWrapper.find(".game-info > div")
     .first()
     .text();
@@ -62,7 +57,7 @@ test.each`
 describe("history", () => {
   const steps = [[0, 0], [1, 1], [0, 1], [2, 2], [0, 2]];
   beforeEach(() => {
-    replayGame(steps);
+    applySteps(steps);
   });
   test("should correct render history", () => {
     const no = 3;
@@ -78,10 +73,11 @@ describe("history", () => {
       .find("button");
 
     const anotherGame = mount(<Game />);
-    replayGame(steps.slice(0, gotoStepNo), anotherGame);
+    applySteps(steps.slice(0, gotoStepNo), anotherGame);
     const expectBoard = anotherGame.find(".game-board").html();
 
     btn.simulate("click");
     expect(GameWrapper.find(".game-board").html()).toBe(expectBoard);
   });
 });
+

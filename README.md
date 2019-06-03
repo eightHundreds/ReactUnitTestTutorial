@@ -12,7 +12,6 @@
 
 1. getStart enzyme测试入门,渲染一个简单的组件
 2. tic-tac-toe 测试react官方文档的教程中的demo`tic-tac-toe`
-3. 持续集成
 
 
 # 参考资料

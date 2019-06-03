@@ -1,4 +1,6 @@
 {
     "jest.pathToJest": "getStart/node_modules/react-scripts/node_modules/.bin/jest",
-    "jest.debugMode": true
+    "jest.debugMode": true,
+    "prettier.useTabs": true,
+    "editor.tabSize": 2
 }
